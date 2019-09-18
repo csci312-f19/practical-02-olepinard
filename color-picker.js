@@ -18,10 +18,10 @@ const createSlider = function createSlider(color, initialValue, callback) {
 
   // create a div to hold the color name and add it to the slider
   const label = document.createElement('div');
-  label.className = `color-label`;
+  label.className = 'color-label';
   label.innerHTML = `${color}:`;
 
-  slider.appendChild(label)
+  slider.appendChild(label);
 
   // create the range input and add it to the slider
   const range = document.createElement('input');
@@ -30,24 +30,23 @@ const createSlider = function createSlider(color, initialValue, callback) {
   range.max = 255;
   range.value = initialValue;
 
-  slider.appendChild(range)
+  slider.appendChild(range);
 
   // create the readout to display the current value and add it to the slider
   const readout = document.createElement('span');
   readout.innerHTML = initialValue;
 
-  slider.appendChild(readout)
+  slider.appendChild(readout);
 
   // set the range input's oninput function to update the readout and call the callback
   range.oninput = () => {
-   readout.innerHTML = range.value;
-   callback({ [color]: parseInt(range.value, 10) });
+    readout.innerHTML = range.value;
+    callback({ [color]: parseInt(range.value, 10) });
   };
 
   // return the slider
 
-  return slider
-
+  return slider;
 };
 
 
@@ -66,12 +65,12 @@ whenever the value of the color changes.
 const createColorPicker = function createColorPicker(initialValue, callback) { // eslint-disable-line no-unused-vars, max-len
   // create a div to hold the picker
   const picker = document.createElement('div');
-  picker.className = `color-picker`;
+  picker.className = 'color-picker';
 
   // create a div with the class 'color-swatch' to provide the colored rectangle
   // and add it to the picker
   const colorBox = document.createElement('div');
-  colorBox.className = `color-swatch`;
+  colorBox.className = 'color-swatch';
 
   picker.appendChild(colorBox);
 
@@ -83,17 +82,17 @@ const createColorPicker = function createColorPicker(initialValue, callback) { /
   // - merge the change into the the current color
   // - set the background color of the swatch
   // - call the callback with the current color
-  const update = function(newColor) {
-    currentColor = { ...currentColor, ...newColor }
+  const update = function (newColor) {
+    currentColor = { ...currentColor, ...newColor };
     const { red, green, blue } = currentColor;
     colorBox.style.background = `rgb(${red}, ${green}, ${blue})`;
     callback(currentColor);
   };
 
   // add sliders for each color channel
-  Object.keys(currentColor).forEach((color) =>{
-    const slider = createSlider(color, currentColor[color], update)
-    picker.appendChild(slider)
+  Object.keys(currentColor).forEach((color) => {
+    const slider = createSlider(color, currentColor[color], update);
+    picker.appendChild(slider);
   });
 
   // call update() to initialize to the correct value
@@ -101,7 +100,6 @@ const createColorPicker = function createColorPicker(initialValue, callback) { /
 
   // return the picker
   return picker;
-
 };
 
 try {
